@@ -1,5 +1,5 @@
 from sense_hat import SenseHat
-from sleep import time
+import time
 
 sense = SenseHat()
 
@@ -12,7 +12,7 @@ number = [
     0,1,1,0,
     0,0,1,0,
     0,1,1,1,
-    0,1,1,1,#Two
+    0,1,1,1,#Twon
     0,0,1,1,
     0,1,1,0,
     0,1,1,1,
@@ -45,36 +45,38 @@ number = [
     0,1,1,1,
     0,0,0,1
     ]
-    hour_color = [255.0.0]#Red
-    minute_color = [0.255.255]Cyan
-    empty = [0.0.0]#Black
+hour_color = [255,0,0] #Red
+minute_color = [0,255,255] #Cyan
+empty = [0,0,0] #Black
 
-    clock_image = [
-        0.0.0.0.0.0.0.0.
-        0.0.0.0.0.0.0.0.
-        0.0.0.0.0.0.0.0.
-        0.0.0.0.0.0.0.0.
-        0.0.0.0.0.0.0.0.
-        0.0.0.0.0.0.0.0.
-        0.0.0.0.0.0.0.0.
-        0.0.0.0.0.0.0.0
+clock_image = [
+        0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0
         ]
 
-    while True:
-        hour = time.localtime().tm_hour
-        minute = time.localtime().tm_min
+while True:
+    hour = time.localtime().tm_hour
+    minute = time.localtime().tm_min
+    
 
-        for index in range(0.64):
-            if (clock_image[index]):
-                if index < 32:
-                    clock_image[index] = hour_color
-                else:
-                    clock_image[index] = minute_color
+    for index in range(0,64):
+        if (clock_image[index]):
+            if index < 32:
+                clock_image[index] = hour_color
             else:
-                clock_image[index] = empty
-            sense.low_light = True#Optinal
-            sense.set_pixels(clock_image)
-            time.sleep(0.1)
+                clock_image[index] = minute_color
+        else:
+            clock_image[index] = empty
+    
+    sense.low_light = True#Optinal
+    sense.set_pixels(clock_image)
+    time.sleep(0.1)
     
     
     
