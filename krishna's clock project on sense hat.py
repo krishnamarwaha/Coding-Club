@@ -12,7 +12,7 @@ number = [
     0,1,1,0,
     0,0,1,0,
     0,1,1,1,
-    0,1,1,1,#Twon
+    0,1,1,1,#Two
     0,0,1,1,
     0,1,1,0,
     0,1,1,1,
@@ -63,21 +63,27 @@ clock_image = [
 while True:
     hour = time.localtime().tm_hour
     minute = time.localtime().tm_min
-    
 
-    for index in range(0,64):
-        if (clock_image[index]):
-            if index < 32:
-                clock_image[index] = hour_color
-            else:
-                clock_image[index] = minute_color
+for index in range(0, 4):
+    if (hour >= 10):
+        clockImage.extend(number[int(hour/10)][index])
+    else:
+        clockImage.extend(noNumber)
+    clockImage.extend(number[int(hour%10)][index])
+
+for index in range(0, 4):
+    clockImage.extend(number[int(minute/10)][index])
+    clockImage.extend(number[int(minute%10)][index])
+
+for index in range(0, 64):
+    if (clockImage[index]):
+        if index < 32:
+            clockImage[index] = hour_color
         else:
-            clock_image[index] = empty
-    
-    sense.low_light = True#Optinal
-    sense.set_pixels(clock_image)
-    time.sleep(0.1)
-    
-    
-    
-    
+            clockImage[index] = minute_color
+    else:
+        clockImage[index] = empty
+
+sense.set_rotation(90) # Optional
+sense.low_light = True # Optional
+sense.set_pixels(clockImage)
